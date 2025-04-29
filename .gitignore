@@ -1,0 +1,32 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Env files (nếu bạn dùng để lưu thông tin đăng nhập)
+.env
+.env.local
+
+# Selenium driver (nếu bạn tự lưu trong thư mục)
+driver/chromedriver
+driver/chromedriver.exe
+
+# VSCode/JetBrains IDE settings
+.vscode/
+.idea/
+
+# Test reports or screenshots (nếu có)
+reports/
+screenshots/
+
+# Cucumber JSON reports (tuỳ bạn cấu hình)
+cucumber-report.json
