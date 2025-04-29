@@ -13,9 +13,9 @@ Before(async function () {
     // const options = new chrome.Options();
     // options.addArguments('--headless'); // Bỏ nếu bạn muốn thấy trình duyệt
 
-    driver = await new Builder()
+    this.driver = await new Builder()
         .forBrowser('chrome')
-        // .setChromeOptions(options)
+        .setChromeOptions(new chrome.Options)
         .setChromeService(service)
         .build();
 
@@ -23,7 +23,7 @@ Before(async function () {
 });
 
 After(async function () {
-    if (driver) {
-        await driver.quit();
+    if (this.driver) {
+        await this.driver.quit();
     }
 });

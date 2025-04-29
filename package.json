@@ -4,7 +4,7 @@
   "description": "Automation test kiểm tra trạng thái đơn hàng SPX sử dụng Cucumber và Selenium WebDriver",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js"
+    "test": "cucumber-js --require features/step_definitions/**/*.js"
   },
   "author": "gin",
   "license": "MIT",
