@@ -1,0 +1,17 @@
+{
+  "name": "spx-order-status-test",
+  "version": "1.0.0",
+  "description": "Automation test kiểm tra trạng thái đơn hàng SPX sử dụng Cucumber và Selenium WebDriver",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "author": "gin",
+  "license": "MIT",
+  "dependencies": {
+    "@cucumber/cucumber": "^9.6.0",
+    "chromedriver": "^123.0.4",
+    "selenium-webdriver": "^4.31.0"
+  },
+  "keywords": []
+}
