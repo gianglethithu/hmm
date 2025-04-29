@@ -6,8 +6,9 @@ class LoginPage {
     }
 
     async login(email, password) {
-        await this.driver.get('https://account.spx.vn/authenticate/login');
-
+        await this.driver.get('https://spx.vn/track?SPXVN054117068914');
+        const  logbutton = await  this.driver.wait(until.elementLocated(By.css('span.login-text')),1000);
+        await  logbutton.click();
         // Đợi input email hiển thị
         const emailInput = await this.driver.wait(
             until.elementLocated(By.css('input[type="text"]')),
