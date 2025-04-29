@@ -6,20 +6,14 @@ const path = require("path");
 let driver;
 
 Before(async function () {
-    const service = new chrome.ServiceBuilder(path.resolve(__dirname, '../chromedriver.exe'));
-
-    // const service = new chrome.ServiceBuilder(driverPath);
-
-    // const options = new chrome.Options();
-    // options.addArguments('--headless'); // Bỏ nếu bạn muốn thấy trình duyệt
+    const driverPath = path.join(__dirname, '..', 'driver', process.platform === 'win32' ? 'chromedriver.exe' : 'chromedriver');
+    const service = new chrome.ServiceBuilder(driverPath);
 
     this.driver = await new Builder()
         .forBrowser('chrome')
-        .setChromeOptions(new chrome.Options)
         .setChromeService(service)
+        // .setChromeOptions(new chrome.Options().headless())
         .build();
-
-    this.driver = driver;
 });
 
 After(async function () {

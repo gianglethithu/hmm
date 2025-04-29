@@ -8,7 +8,7 @@ const OrderPage = require('../../page_objects/orderPage');
 Given('tôi đăng nhập với tài khoản {string} và mật khẩu {string}', async function (email, password){
 
     const loginPage = new LoginPage(this.driver);
-    console.log('>>> this.driver:', this.driver);
+    // console.log('>>> this.driver:', this.driver);
     await loginPage.login(email, password);
 });
 
