@@ -9,15 +9,15 @@ const { logStatus, logError } = require('../../utils/logger');
 let driver;
 let page;
 
-Given('I open the SPX tracking page', async function () {
+Given('I open the SPX tracking page',{ timeout: 20000 }, async function () {
     const service = new chrome.ServiceBuilder(path.resolve(__dirname, '../../driver/chromedriver'));
-    driver = await new Builder()
+    const driver = await new Builder()
         .forBrowser('chrome')
         .setChromeService(service) // sử dụng dòng này thay vì setDefaultService
         .build();
     await driver.manage().setTimeouts({
         pageLoad: 20000,  //  thời gian chờ trang tải
-        implicit: 10000    // tuỳ chọn: chờ phần tử trong 5s
+        implicit: 20000    // tuỳ chọn: chờ phần tử trong 5s
     });
     page = new TrackingPage(driver);
     await page.open();
@@ -28,7 +28,7 @@ When('I input the tracking code {string}', async function (code) {
     await page.inputTrackingCode(code);
 });
 
-Then('I should see the delivery status', async function () {
+Then('I should see the delivery status',{ timeout: 20000 }, async function () {
     const trackingCode = this.trackingCode || 'Unknown';
 
     let status = '';
@@ -44,6 +44,6 @@ Then('I should see the delivery status', async function () {
         logError(trackingCode, err); // ✅ chỉ log lỗi khi có lỗi xảy ra
         throw err;
     } finally {
-        await driver.quit();
+        await this.driver.quit();
     }
 });
