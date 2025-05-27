@@ -22,21 +22,35 @@ class TrackingPage {
 
     async getStatusText() {
         try {
-            // Ưu tiên lấy từ order-status (ví dụ: "Đang trả hàng", "Đã trả hàng")
-            const statusElement = await this.driver.findElements(By.css('span.order-status .ssc-ui-tag'));
-            if (statusElement.length > 0) {
-                const statusText = await statusElement[0].getText();
+            const timeout = 15000; // 15 giây
+            console.log('đến đoạn này3');
+
+            // Đợi phần tử order-status nếu có
+            const statusLocator = By.css('span.order-status .ssc-ui-tag');
+            const milestoneLocator = By.css('div.milestone-item.active p.text');
+
+            // Cố gắng tìm status đầu tiên
+            try {
+                const statusElement = await this.driver.wait(until.elementLocated(statusLocator), timeout);
+                const isVisible = await this.driver.wait(until.elementIsVisible(statusElement), timeout);
+                const statusText = await statusElement.getText();
+                console.log('đến đoạn này4');
+                console.log(statusText);
+
                 return statusText.trim();
+            } catch (_) {
+                // Không tìm thấy order-status, tiếp tục tìm milestone
             }
 
-            // Nếu không có order-status, lấy milestone-item đang active
-            const milestoneElement = await this.driver.findElement(
-                By.css('div.milestone-item.active p.text')
-            );
+            // Nếu không có status, đợi milestone active
+            const milestoneElement = await this.driver.wait(until.elementLocated(milestoneLocator), timeout);
+            await this.driver.wait(until.elementIsVisible(milestoneElement), timeout);
             const milestoneText = await milestoneElement.getText();
             return milestoneText.trim();
+
         } catch (error) {
-            return ''; // Hoặc ghi log lỗi nếu cần
+            console.error('Lỗi khi lấy status:', error);
+            return '';
         }
     }
 }
